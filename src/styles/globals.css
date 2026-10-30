@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Default fallback theme tokens */
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-secondary: #0f172a;
+  --color-secondary-hover: #1e293b;
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-accent: #06b6d4;
+  --color-accent-foreground: #ffffff;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-border: #e2e8f0;
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --radius-button: 0.5rem;
+  --radius-card: 0.75rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  /* Accessibility focus ring */
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    min-height: 100vh;
+  }
+}
