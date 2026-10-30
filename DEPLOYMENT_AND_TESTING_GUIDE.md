@@ -111,43 +111,27 @@ npm run build
 
 ## 2. How to Deploy on GitHub Pages for Clients
 
-We have added an automated GitHub Actions deployment workflow at `.github/workflows/deploy.yml`.
+### Why Was the Screen Completely Black?
+GitHub Pages was initially configured to **"Deploy from a branch"** pointing to `main` / `root`. 
+This caused GitHub to serve the raw uncompiled TypeScript source (`/src/main.tsx`). Modern browsers reject raw `.tsx` files with a MIME type error, so React never mounted into `<div id="root"></div>`, leaving an unrendered screen with the dark background.
 
-### Step 1: Enable GitHub Pages in your Repository Settings
-
-1. Open your repository on GitHub:
-   [https://github.com/priyanshush14/starter-website](https://github.com/priyanshush14/starter-website)
-2. Click the **Settings** tab at the top.
-3. In the left navigation menu under **Code and automation**, click **Pages**.
-4. Under **Build and deployment**:
-   - Change **Source** from *Deploy from a branch* to **GitHub Actions**.
-5. Save changes.
+We have built the production bundle and pushed a dedicated **`gh-pages`** branch to your repository, which contains the compiled HTML, CSS, and JS bundles.
 
 ---
 
-### Step 2: Trigger the Automated Deployment
+### Step-by-Step Fix (30 Seconds)
 
-Because the `.github/workflows/deploy.yml` workflow was committed and pushed to `main`:
+1. Open your repository Pages settings:
+   [https://github.com/priyanshush14/starter-website/settings/pages](https://github.com/priyanshush14/starter-website/settings/pages)
+2. Under **Build and deployment**:
+   - **Source**: Select **Deploy from a branch**
+   - **Branch**: Click the branch dropdown and select **`gh-pages`** (leave the folder as `/ (root)`)
+   - Click **Save**
+3. Wait ~30 to 60 seconds for GitHub to publish the update.
+4. Refresh:
+   **[https://priyanshush14.github.io/starter-website/](https://priyanshush14.github.io/starter-website/)**
 
-1. Any new push to `main` will automatically trigger a build and deployment.
-2. You can also trigger it manually:
-   - Go to the **Actions** tab on your repository.
-   - Click **Deploy to GitHub Pages** in the left sidebar.
-   - Click **Run workflow** -> Select `Branch: main` -> Click **Run workflow**.
-
----
-
-### Step 3: Accessing the Live Demo
-
-Once the GitHub Action completes (usually takes ~1 minute):
-
-- Your live URL will be:
-  **`https://priyanshush14.github.io/starter-website/`**
-
-> **Note:**
-> The build process automatically handles:
-> - Base path prefixing (`/starter-website/`) in `vite.config.ts` and `App.tsx`.
-> - Single Page Application (SPA) routing fallback by copying `index.html` to `404.html`, ensuring refreshing pages like `/starter-website/services` works seamlessly without GitHub 404 errors.
+*(Optional)* If you prefer **GitHub Actions**, you can change **Source** to **GitHub Actions**; the updated workflow now supports both.
 
 ---
 
